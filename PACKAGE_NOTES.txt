@@ -1,0 +1,28 @@
+NEXUS PACKAGE NOTES
+===================
+
+Source:
+- Extracted from the uploaded NEXUS_Data_Intelligence_Engine.ipynb.
+- Engine class implementations were taken from the notebook's engine cells.
+- The integration controller was packaged as controller.py.
+- The Flask API was packaged as app.py.
+
+Packaging adjustments:
+- Report output is configured to use the same reports/ directory as the download endpoint.
+- Cleaning invalidates stale inspection, analytics, and visualization artifacts.
+- Inspection after cleaning profiles the cleaned dataset.
+- The clean API validates its request structure and requires the controller's
+  documented operation format, preventing a false-success no-op.
+- JSON serialization handles common Pandas, NumPy, date, and Plotly values.
+
+Validation performed during packaging:
+- Python syntax compilation passed for the generated Python files.
+- Engine/controller smoke test passed: load, inspect, deduplicate, analyze,
+  visualize, and generate a PDF report.
+- Flask API unittest suite is included in tests/test_api.py. It could not be
+  executed in the packaging runtime because Flask is not installed in that
+  separate runtime. The user's Colab notebook previously passed its 12 API
+  integration checks; the packaged application should still be tested after
+  installing requirements.txt.
+
+This is a development package, not a production deployment.

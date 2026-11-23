@@ -1,0 +1,36 @@
+NEXUS FRONTEND PACKAGE — INSTALLATION
+
+This package adds the first working NEXUS browser dashboard and the Flask homepage route.
+
+FILES:
+- app.py                         Updated Flask app with GET / homepage route
+- templates/index.html           Dashboard structure
+- static/css/style.css            Responsive dark interface
+- static/js/app.js                Frontend/API integration
+
+INSTALL:
+1. Stop the running Flask server in VS Code with Ctrl+C.
+2. Extract this ZIP directly into your INNER NEXUS project folder — the folder that contains engines/, controller.py, app.py and requirements.txt.
+3. Allow Windows to merge the templates and static folders.
+4. Replace the existing app.py with the app.py supplied in this package.
+5. Keep your existing controller.py, engines/, tests/, requirements.txt, uploads/ and reports/ unchanged.
+6. Start the server again from the inner NEXUS folder:
+   python app.py
+7. Open:
+   http://127.0.0.1:5000/
+
+The dashboard uses the existing endpoints:
+GET /api/health
+GET /api/status
+POST /api/upload (multipart field: file)
+POST /api/inspect
+POST /api/clean (JSON: {"operations":[{"name":"remove_duplicates","parameters":{}}]})
+POST /api/analyze
+POST /api/visualizations
+POST /api/report
+GET /api/reports/<filename>
+
+NOTES:
+- Plotly charts load from the Plotly CDN, so chart rendering requires an internet connection.
+- This is a local development dashboard. It does not add authentication or multi-user support.
+- The backend currently keeps one active dataset in process memory.
